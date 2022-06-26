@@ -23,23 +23,29 @@ class RegisterType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Please enter your first name'
                 ],
-                'constraints' => new Length(['min' => 3]),
-                'constraints' => new Length(['max' => 30])
+                'constraints' => new Length([
+                    'min' => 3,
+                    'max' => 30
+                    ])
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Last name',
                 'attr' => [
                     'placeholder' => 'Please enter your last name'
                 ],
-                'constraints' => new Length(['min' => 3]),
-                'constraints' => new Length(['max' => 30])
+                'constraints' => new Length([
+                    'min' => 3,
+                    'max' => 30
+                    ])
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
                     'placeholder' => 'Please enter your email adress'
                 ],
-                'constraints' => new Length(['min' => 3]),
-                'constraints' => new Length(['max' => 50])
+                'constraints' => new Length([
+                    'min' => 3,
+                    'max' => 50
+                    ])
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -50,13 +56,15 @@ class RegisterType extends AbstractType
                     'attr' => [
                         'placeholder' => 'Please enter your password'
                     ]
+
                 ],
                 'second_options' => [
                     'label' => 'Password confirm',
                     'attr' => [
                         'placeholder' => 'Please confirm your password'
                     ]
-                    ]               
+                    ]
+                
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Register'
