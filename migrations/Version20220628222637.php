@@ -14,7 +14,7 @@ final class Version20220628222637 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Created product entity & added relation to category';
+        return 'Created product entity & added relations to category';
     }
 
     public function up(Schema $schema): void
