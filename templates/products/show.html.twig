@@ -14,7 +14,7 @@
                 <p class="text-muted d-block">{{product.subtitle}}</p>
                 <span>{{product.price / 100|number_format(2) }} €</span>
                 <p>{{ product.description }}</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <a href="{{ path('add_to_cart', { 'id' : product.id }) }}" class="btn btn-primary">Add to cart</a>
             </div>     
        </div>
     
