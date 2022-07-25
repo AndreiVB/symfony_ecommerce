@@ -3,12 +3,15 @@
 {% block title %}My account - The shop{% endblock %}
 
 {% block body %}
-    <h1>My account</h1>
-    Welcome to your account {{ app.user.firstName }}. Manage your account as you want.
+    <h1 class="h2">My account</h1>
+    <p>Welcome to your account {{ app.user.firstName }}. Manage your account as you want.</p>
     <hr>
-    <a href="{{path('app_account_password')}}">Modify password</a>
-    -add adresses
-    -orders
+    <div>
+        <a href="{{path('app_account_password')}}" class="d-block">Modify password</a>
+        <a href="{{path('app_account_address')}}" class="d-block">Set up addresses</a>
+        -add adresses
+        -orders
+    </div>
     </hr>
     
 {% endblock %}
