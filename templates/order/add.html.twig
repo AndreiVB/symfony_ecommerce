@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order payment - the shop{% endblock %}
+
+{% block body %}
+    <h2>Order summary</h2>
+    <p>Please verify all the info before payment</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Delivery address: </p>
+            <div class="form-check">
+                {{ delivery|raw }}
+            </div>
+            <hr>
+            <p class="mb-2">Carrier :</p>
+            <ul class="list-unstyled form-check">
+                <li class="">{{carrier.name}}</li>
+                <li class="">{{carrier.description}}</li>
+                <li class="">{{carrier.price|number_format(2)}} €</li>
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            
+                <p class="text-center mb-1">My order</p>
+            
+
+            <div class="order-summary mt-3">
+                {% set total = null %}
+                    {% for product in cart %}
+                        <div class="row">
+                            <div class="col-3 my-2">
+                                <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px"> 
+                            </div>     
+                            <div class="col-4 my-auto">
+                                <span class="d-block">{{ product.product.name }}</span>
+                                <small>{{ product.product.subtitle }}</small>
+                            </div>      
+                            <div class="col-2 my-auto">
+                                x {{ product.quantity }}
+                            </div>
+
+                            <div class="col-3 my-auto">
+                                {{ (product.product.price * product.quantity) / 100|number_format(2) }} €
+                            </div>
+                        </div>   
+                {% set total = total + (product.product.price * product.quantity) %}           
+                    {% endfor %}
+            </div>
+
+            
+            <hr>
+
+            <div class="col">
+                <p><strong>Products: </strong>{{ (total / 100|number_format(2)) }} €</p>
+                <p><strong>Delivery: </strong>{{ (carrier.price|number_format(2)) }} €</p>
+                <hr>
+                <p><strong>Total: </strong>{{ (total / 100 + carrier.price|number_format(2)) }} €</p>                               
+            </div>
+
+            
+            <a href="" class="btn btn-success btn-block mt-5">Pay now {{ (total / 100 + carrier.price|number_format(2)) }} €</a>
+        </div>
+    </div>
+{% endblock %}

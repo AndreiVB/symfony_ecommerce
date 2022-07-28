@@ -7,3 +7,17 @@
 	height: 20px;
 	padding-left: 15px;
 }
+
+.form-check {
+	background-color: #f4f8ff;
+	padding: 20px 40px;
+	margin-top: 10 px;
+}
+
+.col-form-label {
+	font-weight: bold;
+}
+
+.order-summary {
+	background-color: #f4f8ff;
+}

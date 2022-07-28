@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validate the order - the shop{% endblock %}
+
+{% block body %}
+    <h2>Order now</h2>
+    <p>Select order prefferences</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {% set formHtml %}
+                {{ form_start(form, {action:path('app_order_summary')}) }}
+                {{ form_label(form.addresses, 'Choose delivery address')}}
+                    
+                    <a href="{{path('app_account_address_add')}}">Add a new address</a>
+                {{ form_end(form) }}
+            {% endset %}
+            
+            {{formHtml|replace({'[br]' : '</br>'})|raw }}
+        </div>
+        <div class="col-md-6">
+
+            <p class="text-center fw-bold"> Order summary</p>
+            <p class="text-center mb-1"> Check your cart</p>
+
+            <div class="order-summary mt-3">
+                {% for product in cart %}
+                    <div class="row">
+                        <div class="col my-2">
+                            <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px"> 
+                        </div>     
+                        <div class="col my-auto">
+                            {{ product.product.name }}<br/>
+                            <small>{{ product.product.subtitle }}</small>
+                        </div>      
+                        <div class="col my-auto">
+                            x {{ product.quantity }}
+                        </div>
+                    </div>              
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}
