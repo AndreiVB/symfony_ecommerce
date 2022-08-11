@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Classes\Mail;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,23 +26,39 @@ class RegisterController extends AbstractController
      */
     public function index(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
+        //variable to notificate registration is valid
+        $notification = null;
+
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            
             $user = $form->getData();
             
-            $password = $passwordHasher->hashPassword($user, $user->getPassword());
-            $user->setPassword($password);
+            $searchEmail = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-         
+            if(!$searchEmail) {
+                $password = $passwordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();  
+            
+                $mail = new Mail();
+                $welcomeMesssage = "Welcome on The Shop Project";
+                $content = "Hello " . $user->getFirstname() . ", hope you will have a great time on our site. We have a great diversity of fashion products. Enjoy shopping right now &#128516";
+                $mail->send($user->getEmail(), $user->getFirstname(), $welcomeMesssage, $content);
+                $notification = "You have registered successfully";
+            } else {
+                $notification = "Email address already taken";
+            }                        
         }
         return $this->render('register/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
 }
