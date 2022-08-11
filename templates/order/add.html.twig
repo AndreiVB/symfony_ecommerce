@@ -1,66 +1,116 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order payment - the shop{% endblock %}
+{% block javascript %}
+
+	<script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+{% block title %}Order payment - the shop
+{% endblock %}
 
 {% block body %}
-    <h2>Order summary</h2>
-    <p>Please verify all the info before payment</p>
-    <hr>
-    <div class="row">
-        <div class="col-md-6">
-            <p>Delivery address: </p>
-            <div class="form-check">
-                {{ delivery|raw }}
-            </div>
-            <hr>
-            <p class="mb-2">Carrier :</p>
-            <ul class="list-unstyled form-check">
-                <li class="">{{carrier.name}}</li>
-                <li class="">{{carrier.description}}</li>
-                <li class="">{{carrier.price|number_format(2)}} €</li>
-            </ul>
-        </div>
+	<h2>Order summary</h2>
+	<p>Please verify all the info before payment</p>
+	<hr>
+	<div class="row">
+		<div class="col-md-6">
+			<p>Delivery address:
+			</p>
+			<div class="form-check">
+				{{ delivery|raw }}
+			</div>
+			<hr>
+			<p class="mb-2">Carrier :</p>
+			<ul class="list-unstyled form-check">
+				<li class="">{{carrier.name}}</li>
+				<li class="">{{carrier.description}}</li>
+				<li class="">{{(carrier.price / 100)|number_format(2, ',', ',')}}
+					€</li>
+			</ul>
+		</div>
 
-        <div class="col-md-6">
-            
-                <p class="text-center mb-1">My order</p>
-            
+		<div class="col-md-6">
 
-            <div class="order-summary mt-3">
-                {% set total = null %}
-                    {% for product in cart %}
-                        <div class="row">
-                            <div class="col-3 my-2">
-                                <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px"> 
-                            </div>     
-                            <div class="col-4 my-auto">
-                                <span class="d-block">{{ product.product.name }}</span>
-                                <small>{{ product.product.subtitle }}</small>
-                            </div>      
-                            <div class="col-2 my-auto">
-                                x {{ product.quantity }}
-                            </div>
+			<p class="text-center mb-1">My order</p>
 
-                            <div class="col-3 my-auto">
-                                {{ (product.product.price * product.quantity) / 100|number_format(2) }} €
-                            </div>
-                        </div>   
-                {% set total = total + (product.product.price * product.quantity) %}           
-                    {% endfor %}
-            </div>
 
-            
-            <hr>
+			<div class="order-summary mt-3">
+				{% set total = null %}
+				{% for product in cart %}
+					<div class="row">
+						<div class="col-3 my-2">
+							<img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
+						</div>
+						<div class="col-4 my-auto">
+							<span class="d-block">{{ product.product.name }}</span>
+							<small>{{ product.product.subtitle }}</small>
+						</div>
+						<div class="col-2 my-auto">
+							x
+							{{ product.quantity }}
+						</div>
 
-            <div class="col">
-                <p><strong>Products: </strong>{{ (total / 100|number_format(2)) }} €</p>
-                <p><strong>Delivery: </strong>{{ (carrier.price|number_format(2)) }} €</p>
-                <hr>
-                <p><strong>Total: </strong>{{ (total / 100 + carrier.price|number_format(2)) }} €</p>                               
-            </div>
+						<div class="col-3 my-auto">
+							{{ ((product.product.price * product.quantity) / 100)|number_format(2, ',', ',') }}
+							€
+						</div>
+					</div>
+					{% set total = total + (product.product.price * product.quantity) %}
+				{% endfor %}
+			</div>
 
-            
-            <a href="" class="btn btn-success btn-block mt-5">Pay now {{ (total / 100 + carrier.price|number_format(2)) }} €</a>
-        </div>
-    </div>
+
+			<hr>
+
+			<div class="col">
+				<p>
+					<strong>Products:
+					</strong>
+					{{ ((total / 100)|number_format(2, ',', ',')) }}
+					€</p>
+				<p>
+					<strong>Delivery:
+					</strong>
+					{{ ((carrier.price / 100)|number_format(2, ',', ',')) }}
+					€</p>
+				<hr>
+				<p>
+					<strong>Total:
+					</strong>
+					{{ ( ((total / 100) + (carrier.price / 100) )|number_format(2, ',', ',')) }}
+					€</p>
+			</div>
+
+
+			<a href="{{ path('app_stripe_create_session', {'reference':reference}) }}" class="btn btn-success btn-block mt-5" id="checkout-button">Pay now
+				{{ ( (total / 100) + (carrier.price / 100) )|number_format(2, ',', ',') }}
+				€</a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript">
+
+		var stripe = Stripe['sk_test_51LQUKMFDr7nDVKwUDbbS5C1NywoHdWpum9Atn2GR9EBUyp2II8gNE8k1hV9LgRHKJdYg1MAjOXJ67Do4Ni4Tghip00vfbMlgqA'];
+var checkoutButton = document.getElementById("checkout-button");
+checkoutButton.addEventListener("click", function () {
+fetch("/order/create-session/ {{ reference }}", {method: "POST"}).then(function (response) {
+return response.json();
+}).then(function (session) {
+if (session.error == 'order') { // redirect
+window.location.replace('{{ path('app_order') }}');
+
+} else {
+return stripe.redirectToCheckout({sessionId: session.id});
+}
+
+}).then(function (result) {
+if (result.error) {
+alert(result.error.message);
+}
+}).catch(function (error) {
+console.error("Error", error);
+})
+})
+	</script>
 {% endblock %}

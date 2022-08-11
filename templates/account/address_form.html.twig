@@ -1,25 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add an address - The shop{% endblock %}
+{% block title %}Add an address - The shop
+{% endblock %}
 
 {% block body %}
-    <h1 class="h2">Address management</h1>
-    <a href="{{path('app_account_address')}}">Go back</a>
-    <hr>
-    {{form_start(form)}}
-        <div class="row">
-            <div class="col-md-12">{{form_row(form.name)}}</div>
-            <div class="col-md-6">{{form_row(form.firstname)}}</div>
-            <div class="col-md-6">{{form_row(form.lastname)}}</div>
-            <div class="col-md-6">{{form_row(form.company)}}</div>
-            <div class="col-md-6">{{form_row(form.address)}}</div>
-            <div class="col-md-6">{{form_row(form.postalcode)}}</div>
-            <div class="col-md-6">{{form_row(form.city)}}</div>
-            <div class="col-md-6">{{form_row(form.country)}}</div>
-            <div class="col-md-6">{{form_row(form.phone)}}</div>
-        </div>
-    {{form_end(form)}}
-    
-    </hr>
-    
-{% endblock %}
+	<h1 class="h2">Address management</h1>
+	<a href="{{path('app_account_address')}}">Go back</a>
+	<hr>
+	{{form_start(form)}}
+	<div class="row">
+		<div class="col-md-12">{{form_row(form.name)}}</div>
+		<div class="col-md-6">{{form_row(form.firstname)}}</div>
+		<div class="col-md-6">{{form_row(form.lastname)}}</div>
+		<div class="col-md-6">{{form_row(form.company)}}</div>
+		<div class="col-md-6">{{form_row(form.address)}}</div>
+		<div class="col-md-6">{{form_row(form.postalcode)}}</div>
+		<div class="col-md-6">{{form_row(form.city)}}</div>
+		<div class="col-md-6">{{form_row(form.country)}}</div>
+		<div class="col-md-6">{{form_row(form.phone)}}</div>
+	</div>
+	{{form_end(form)}}
+
+</hr>{% endblock %}

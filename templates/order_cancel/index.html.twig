@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment error- The shop
+{% endblock %}
+
+{% block body %}
+	<h2>Payment error</h2>
+	<p>Hello,
+		{{order.user.firstname}}
+		{{order.user.lastname}}</p>
+	<p>It has been a problem with your payment for your order n°{{order.reference}}</p>
+	<p>We have sent you an error confirmation to your registered mail
+		{{order.user.email}}</p>
+	<hr>
+	<a href="{{ path('app_order') }}" class="btn btn-succes">Retry to pay</a>
+
+{% endblock %}

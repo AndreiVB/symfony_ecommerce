@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validate order - The shop
+{% endblock %}
+
+{% block body %}
+	<h2>Order confirmation</h2>
+	<p>Hello,
+		{{order.user.firstname}}
+		{{order.user.lastname}}</p>
+	<p>Thank you for your order n°<strong>{{order.reference}}</strong>
+	</p>
+
+	<p>We have sent you a confirmation to your registered mail
+		<strong>{{order.user.email}}</strong>
+	</p>
+
+
+	<hr>
+	<p>Your order will be delivered by
+		{{ order.carrierName }}
+		at :</p>
+	<p>{{ order.delivery|raw }}</p>
+	<hr>
+	<p>Track your order in your
+		<a href="{{ path('app_account_order') }}">account</a>
+	</p>
+
+{% endblock %}

@@ -1,35 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My addresses - The shop{% endblock %}
+{% block title %}My addresses - The shop
+{% endblock %}
 
 {% block body %}
-    <a href="{{path('app_account_address_add')}}" class="btn btn-info btn-md float-right mt-2">Add address</a>
-    <h1 class="h2">My addresses</h1>
-    <p>Manage your addresses as you want.</p>
-    <a href="{{path('app_account')}}">Go back</a>
-    <hr>
-    {% if app.user.addresses |length == 0 %}
-        <p>You didn't add no address. Add one by clicking <a href="{{path('app_account_address_add')}}">here</a>.</p>  
-    {% else %}
-        
-        <div class="row">
-            {% for address in app.user.addresses %}
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{ address.name }}</h5>
-                            <p class="card-text">{{ address.address }}</p>
-                            <p class="card-text">{{ address.postalcode}} - {{ address.city}} - {{ address.country}}</p>
-                            <a href="{{ path('app_account_address_edit', {'id' : address.id})}}">Modify</a> | <a href="{{ path('app_account_address_delete', {'id' : address.id})}}">Delete</a>
-                        </div>
-                    </div>              
-                </div>
-            {% endfor %}
-        </div>
+	<a href="{{path('app_account_address_add')}}" class="btn btn-info btn-md float-right mt-2">Add address</a>
+	<h1 class="h2">My addresses</h1>
+	<p>Manage your addresses as you want.</p>
+	<a href="{{path('app_account')}}">Go back</a>
+	<hr>
+	{% if app.user.addresses |length == 0 %}
+		<p>You didn't add no address. Add one by clicking
+			<a href="{{path('app_account_address_add')}}">here</a>.</p>
+	{% else %}
 
-    {% endif %}
-   
-    
-    </hr>
-    
-{% endblock %}
+		<div class="row">
+			{% for address in app.user.addresses %}
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body text-center">
+							<h5 class="card-title">{{ address.name }}</h5>
+							<p class="card-text">{{ address.address }}</p>
+							<p class="card-text">{{ address.postalcode}}
+								-
+								{{ address.city}}
+								-
+								{{ address.country}}</p>
+							<a href="{{ path('app_account_address_edit', {'id' : address.id})}}">Modify</a>
+							|
+							<a href="{{ path('app_account_address_delete', {'id' : address.id})}}">Delete</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+	{% endif %}
+
+
+</hr>{% endblock %}
