@@ -9,58 +9,67 @@
 	<a href="{{path('app_account_order')}}">Back to orders</a>
 	<hr>
 	<p>
-		<strong>Orderet at:</strong>
-		{{ order.createdAt|date('d/m/Y') }}
-	</p>
-	<p>
-		<strong>Order reference:</strong>
-		<small>{{ order.reference }}</small>
-	</p>
-	<p>
-		<strong>Carrier:</strong>
-		{{ order.carrierName }}
-	</p>
-	<p>
-		<strong>Order details:</strong>
+		<strong>Order status:</strong>
+		{% if order.state == 1 %}
+			Payment accepted
+		{% elseif order.state == 2 %}
+			In preparation
+		{% elseif order.state == 3 %}
+			Delivery in progress
+		{% endif %}
 	</p>
 
-	<table class="table text-center">
-		<thead>
+</p>
+<p>
+	<strong>Orderet at:</strong>
+	{{ order.createdAt|date('d/m/Y') }}
+</p>
+<p>
+	<strong>Order reference:</strong>
+	<small>{{ order.reference }}</small>
+</p>
+<p>
+	<strong>Carrier:</strong>
+	{{ order.carrierName }}
+</p>
+<p>
+	<strong>Order details:</strong>
+</p>
+
+<table class="table text-center">
+	<thead>
+		<tr>
+			<th scope="col">Product(s)</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Unit price</th>
+			<th scope="col">Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for product in order.orderDetails %}
 			<tr>
-				<th scope="col">Product(s)</th>
-				<th scope="col">Quantity</th>
-				<th scope="col">Unit price</th>
-				<th scope="col">Total</th>
+				<td>{{ product.product }}</td>
+				<td>x
+					{{ product.quantity }}</td>
+				<td>{{ (product.price / 100)|number_format(2, ',', ',') }}</td>
+				<td>{{ (product.total / 100)|number_format(2, ',', ',') }}
+				</td>
 			</tr>
-		</thead>
-		<tbody>
-			{% for product in order.orderDetails %}
-				<tr>
-					<td>{{ product.product }}</td>
-					<td>x
-						{{ product.quantity }}</td>
-					<td>{{ (product.price / 100)|number_format(2, ',', ',') }}</td>
-					<td>{{ (product.total / 100)|number_format(2, ',', ',') }}
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
+		{% endfor %}
 	</tbody>
-</table>
-<div class="text-right">
-	<p class="mb-0">
-		<strong>Products:</strong>
-		{{ (order.getTotal / 100)|number_format(2, ',', ',') }}
-		€
-	</p>
-	<p class="mb-0">
-		<strong>Delivery:</strong>
-		{{ (order.carrierPrice /100)|number_format(2, ',', ',') }}
-		€
-	</p>
-	<p class="mb-0">
-		<strong>Total:</strong>
-		{{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2, ',', ',') }}
-		€
-	</p>
-</div>{% endblock %}
+</tbody></table><div class="text-right">
+<p class="mb-0">
+	<strong>Products:</strong>
+	{{ (order.getTotal / 100)|number_format(2, ',', ',') }}
+	€
+</p>
+<p class="mb-0">
+	<strong>Delivery:</strong>
+	{{ (order.carrierPrice /100)|number_format(2, ',', ',') }}
+	€
+</p>
+<p class="mb-0">
+	<strong>Total:</strong>
+	{{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2, ',', ',') }}
+	€
+</p></div>{% endblock %}
