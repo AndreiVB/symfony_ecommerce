@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact us - The Shop
+{% endblock %}
+
+{% block body %}
+	<div class="row mb-3">
+		<div class="col-md-9 mx-auto text-center">
+			<h1 class="h2">Contact us</h1>
+			<p>Have a question? We would love to hear it. Send us a message and we will respond as soon as possible</p>
+		</div>
+	</div>
+
+	{% for message in app.flashes('notification') %}
+		<div class="alert alert-info text-center mx-auto">{{ message }}</div>
+	{% endfor %}
+
+
+	<div class="row">
+		<div class="col-md-7">
+			{{form(form)}}
+			</div>
+
+			<div class="col-md-5 text-center">
+				<p>The Shop</p>
+				<hr>
+
+				<p>Call us:
+					<a href="tel:0606060606">0606060606</a>
+				</p>
+				<p>13 Fleet Street, 23555 Dream Town.</p>
+				<p>contact@TheShopProject.space</p>
+			</p>
+
+		</div>
+	</div>
+
+{% endblock %}

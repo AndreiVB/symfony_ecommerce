@@ -6,7 +6,7 @@
 
 {% block body %}
 
-	<div class="row">
+	<div class="row mb-5">
 		<div class="col-md-5">
 			<img src="/uploads/{{product.illustration}}" alt="product.name" class="img-fluid">
 		</div>
@@ -20,5 +20,15 @@
 			<a href="{{ path('add_to_cart', { 'id' : product.id }) }}" class="btn btn-primary">Add to cart</a>
 		</div>
 	</div>
+	<hr>
+	<h3>Best sales</h3>
+	<p>Find our most sold products</p>
+	<div class="row">
+		{% for product in products %}
+			<div class="col-md-3">{% include 'products/single_product.html.twig' %}</div>
+
+		{% endfor %}
+	</div>
+
 
 {% endblock %}

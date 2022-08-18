@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forgot password - The shop
+{% endblock %}
+
+{% block body %}
+
+	{% for message in app.flashes('notification') %}
+		<div class="alert alert-info text-center col-md-6 mx-auto">{{ message }}</div>
+
+	{% endfor %}
+	<div class="col-md-6 mx-auto text-center">
+		<h1 class="h3 mb-3 font-weight-normal">Reset your password</h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			{{ form(form) }}
+			</div>
+		</div>
+
+	{% endblock %}

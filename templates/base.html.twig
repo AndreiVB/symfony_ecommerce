@@ -46,11 +46,12 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="{{path('app_products')}}">Our products</a>
 						</li>
+
 						<li class="nav-item active">
 							<a class="nav-link" href="#">Who we are?</a>
 						</li>
 						<li class="nav-item active">
-							<a class="nav-link" href="#">Contact us</a>
+							<a class="nav-link" href="{{path('app_contact')}}">Contact us</a>
 						</li>
 					</ul>
 					<div class="navbar-links">
@@ -131,7 +132,7 @@
 
 
 					<!-- Marketing messaging and featurettes
-					    ================================================== -->
+																																			    ================================================== -->
 					<!-- Wrap the rest of the page in another container to center all the content. -->
 
 					<div class="container marketing {% if block('carousel') is not defined %}mt-5{% endif %}"> {% block body %}{% endblock %}
