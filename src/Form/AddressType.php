@@ -43,9 +43,9 @@ class AddressType extends AbstractType
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'Name of your address',
+                'label' => 'Address details',
                 'attr' => [
-                    'placeholder' => 'eg: Fleet Street, nr 8, London'
+                    'placeholder' => 'eg: Fleet Street, nr 8, 2nd floor'
                 ]
             ])
             ->add('postalcode', TextType::class, [

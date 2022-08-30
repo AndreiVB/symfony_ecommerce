@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}About us - The Shop!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<h2>Who we are</h2>
+				<p class="lead">We are a team of fashion passionates</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id enim sit illo quisquam, veritatis unde cumque non dignissimos dolor nulla. Accusantium repudiandae repellendus corporis at. Doloremque necessitatibus cum nemo animi.</p>
+				<p>Any questions? Send us a message
+					<a href="{{ path('app_contact') }}">message</a>
+				</p>
+				<p>We will respond as soon as we can.</p>
+			</div>
+
+			<div class="col-md-5 my-auto"><img src="{{ asset('assets/images/about.jpg')}}" class="img-fluid" alt="Clothes and shoes"></div>
+
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
+
 
 {% block title %}Validate order - The shop
 {% endblock %}
@@ -6,8 +7,9 @@
 {% block body %}
 	<h2>Order confirmation</h2>
 	<p>Hello,
-		{{order.user.firstname}}
-		{{order.user.lastname}}</p>
+		<strong>{{order.user.firstname}}
+			{{order.user.lastname}}</strong>
+	</p>
 	<p>Thank you for your order n°<strong>{{order.reference}}</strong>
 	</p>
 
