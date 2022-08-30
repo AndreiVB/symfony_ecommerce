@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
+
 
 {% block title %}My cart - The shop
 {% endblock %}
@@ -56,10 +57,19 @@
 			<p>Total of my cart :
 				{{ ((total / 100)|number_format(2, ',', ',') ) }}
 				€</p>
-			<a href="{{ path('app_order')}}" class="btn btn-success mt-3">Validate the basket</a>
+			<div class="d-flex justify-content-between mt-3">
+				<a href="{{ path('app_products')}}" class="btn btn-info">Add more products</a>
+
+				<a href="{{ path('app_order')}}" class="btn btn-success">Validate the basket</a>
+			</div>
+
+
 		</div>
 	{% else %}
 		<hr>
-		<p>Your cart is emtpy</p>
+		<p>Your cart is emtpy, go and check our products
+			<a href="{{ path('app_products')}}">here!</a>
+		</p>
+
 	{% endif %}
 {% endblock %}

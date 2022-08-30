@@ -1,57 +1,57 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
+
 
 {% block title %}My orders - The shop
 {% endblock %}
 
 {% block body %}
-<h1 class="h2">My orders</h1>
-<p>View your orders.</p>
-<a href="{{path('app_account')}}">Go back</a>
-{% if orders |length == 0 %}
-	<hr>
-	<p>You haven't made any orders.</p>
-{% else %}
-	<table class="table mt-5 text-center">
-		<thead>
-			<tr>
-				<th scope="col">Reference</th>
-				<th scope="col">Status</th>
-				<th scope="col">Ordered at</th>
-				<th scope="col">Product(s)</th>
-				<th scope="col">Total</th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			{% for order in orders %}
+	<h1 class="h2">My orders</h1>
+	<p>View your orders.</p>
+	<a href="{{path('app_account')}}">Go back</a>
+	{% if orders |length == 0 %}
+		<hr>
+		<p>You haven't made any orders.</p>
+	{% else %}
+		<table class="table mt-5 text-center">
+			<thead>
 				<tr>
-					<td>
-						<span class="badge bg-secondary text-white">
-							{{ order.reference }}
-						</span>
-					</td>
-					<td>
-						{% if order.state == 1 %}
-							Payment accepted
-						{% elseif order.state == 2 %}
-							In preparation
-						{% elseif order.state == 3 %}
-							Delivery in progress
-						{% endif %}
-					</td>
-					<td>{{ order.createdAt|date('d/m/Y') }}</td>
-					<td>{{ order.orderDetails|length }}</td>
-					<td>{{ ((order.carrierPrice +
-							 order.getTotal) / 100)|number_format(2, ',', ',') }}
-						€</td>
-					<td class="text-right">
-						<a href="{{ path('app_account_order_show', {'reference': order.reference} ) }}">Check order</a>
-					</td>
+					<th scope="col">Reference</th>
+					<th scope="col">Status</th>
+					<th scope="col">Ordered at</th>
+					<th scope="col">Product(s)</th>
+					<th scope="col">Total</th>
+					<th scope="col"></th>
 				</tr>
+			</thead>
 
+			<tbody>
+				{% for order in orders %}
+					<tr>
+						<td>
+							<span class="badge bg-secondary text-white">
+								{{ order.reference }}
+							</span>
+						</td>
+						<td>
+							{% if order.state == 1 %}
+								Payment accepted
+							{% elseif order.state == 2 %}
+								In preparation
+							{% elseif order.state == 3 %}
+								Delivery in progress
+							{% endif %}
+						</td>
+						<td>{{ order.createdAt|date('d/m/Y') }}</td>
+						<td>{{ order.orderDetails|length }}</td>
+						<td>{{ ((order.carrierPrice +
+							 order.getTotal) / 100)|number_format(2, ',', ',') }}
+							€</td>
+						<td class="text-right">
+							<a href="{{ path('app_account_order_show', {'reference': order.reference} ) }}">Check order</a>
+						</td>
+					</tr>
+				{% endfor %}
 			</tbody>
-		</tbody>
-	</tr>
-
-</tbody></tr>{% endfor %}</tbody></table>{% endif %}</hr>{% endblock %}
+		</table>
+	{% endif %}
+{% endblock %}

@@ -1,3 +1,8 @@
+body {
+	min-height: 100vh;
+	position: relative;
+}
+
 .navbar-links,
 .navbar-links a {
 	color: #fff;
@@ -27,4 +32,11 @@
 	background-attachment: fixed !important;
 	background-position: center center !important;
 	background-size: cover !important;
+}
+
+footer {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
 }

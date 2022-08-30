@@ -102,7 +102,7 @@ class OrderCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             DateField::new('createdAt', 'Ordered at'),
             TextField::new('user.fullName', 'User'),
             TextField::new('delivery', 'Delivery address')->onlyOnDetail()->renderAsHtml(),
@@ -116,7 +116,7 @@ class OrderCrudController extends AbstractCrudController
                 'Delivery in progress' => 3
                 
             ]),
-            ArrayField::new('orderDetails', 'Products bought')->hideOnIndex()
+            ArrayField::new('orderDetails', 'Products bought')->hideOnIndex()->hideOnForm()
         ];
     }
     
