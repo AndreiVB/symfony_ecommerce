@@ -52,6 +52,7 @@ class RegisterController extends AbstractController
                 $content = "Hello " . $user->getFirstname() . ", hope you will have a great time on our site. We have a great diversity of fashion products. Enjoy shopping right now &#128516";
                 $mail->send($user->getEmail(), $user->getFirstname(), $welcomeMesssage, $content);
                 $notification = "You have registered successfully";
+
             } else {
                 $notification = "Email address already taken";
             }                        

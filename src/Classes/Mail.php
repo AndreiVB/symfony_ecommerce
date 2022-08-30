@@ -17,7 +17,7 @@ class Mail
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "capdemat89@yahoo.com",
+                        'Email' => "pezevenchi@yopmail.com",
                         'Name' => "The shop Project"
                     ],
                     'To' => [

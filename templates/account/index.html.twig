@@ -1,39 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
+
 
 {% block title %}My account - The shop
 {% endblock %}
 
 {% block body %}
-	<h1 class="h2">My account</h1>
+	<div class="container">
+		<h1 class="h2">My account</h1>
 
-	<p>Welcome to your account
-		{{ app.user.firstName }}. Manage your account as you want.</p>
-	<hr>
-		<div class="row text-center">
-			{% if is_granted('ROLE_ADMIN') %}
+		<p>Welcome to your account
+			{{ app.user.firstName }}. Manage your account as you want.</p>
+		<hr>
+			<div class="row text-center">
+				{% if is_granted('ROLE_ADMIN') %}
+					<div class="col-md-4 account-item my-2">
+
+						<a href="/admin" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/admin.png')}}" class="mr-3">Admin backoffice</a>
+					</div>
+				{% endif %}
+
 				<div class="col-md-4 account-item my-2">
+					<a href="{{path('app_account_password')}}" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/password.png')}}" class="mr-3">Modify password</a>
 
-					<a href="/admin" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/admin.png')}}" class="mr-3">Admin backoffice</a>
 				</div>
-			{% endif %}
 
-			<div class="col-md-4 account-item my-2">
-				<a href="{{path('app_account_password')}}" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/password.png')}}" class="mr-3">Modify password</a>
+				<div class="col-md-4 account-item my-2">
+					<a href="{{path('app_account_address')}}" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/addresses.png')}}" class="mr-3">Set up addresses</a>
 
+				</div>
+
+				<div class="col-md-4 account-item my-2">
+					<a href="{{path('app_account_order')}}" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/orders.png')}}" class="mr-3">My orders</a>
+
+				</div>
 			</div>
-
-			<div class="col-md-4 account-item my-2">
-				<a href="{{path('app_account_address')}}" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/addresses.png')}}" class="mr-3">Set up addresses</a>
-
-			</div>
-
-			<div class="col-md-4 account-item my-2">
-				<a href="{{path('app_account_order')}}" class="d-block btn btn-small btn-outline-secondary"><img src="{{asset('assets/images/orders.png')}}" class="mr-3">My orders</a>
-
-			</div>
-		</div>
-	</hr>
-	<hr>
+		</hr>
+		<hr>
+	</div>
 
 
 {% endblock %}
