@@ -30,9 +30,12 @@
 						<a href="{{path('app_register')}}">Register<a/>
 						{% endif %}
 					</div>
-					<a href="{{path('app_cart')}}">
-						<img src="{{ asset('assets/images/shopping-cart.png') }}" alt="my-cart" class="cart-icon">
-					</a>
+					{% if app.user%}
+						<a href="{{path('app_cart')}}">
+							<img src="{{ asset('assets/images/shopping-cart.png') }}" alt="my-cart" class="cart-icon">
+						</a>
+					{% endif %}
+
 				</div>
 			</nav>
 		</header>
