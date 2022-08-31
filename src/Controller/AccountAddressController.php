@@ -43,10 +43,10 @@ class AccountAddressController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $address->setUser($this->getUser());
             $this->entityManager->persist($address);
-            $this->entityManager->flush();
+            $this->entityManager->flush();         
             if($cart->get()) {
                 return $this->redirectToRoute('app_order');
-            } else {
+            } else {            
                 return $this->redirectToRoute('app_account_address');
             }
             
@@ -73,7 +73,7 @@ class AccountAddressController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
+            $this->entityManager->flush();    
             return $this->redirectToRoute('app_account_address');
         }
         return $this->render('account/address_form.html.twig', [
@@ -93,7 +93,9 @@ class AccountAddressController extends AbstractController
         if($address && $address->getUser() == $this->getUser()) {
             $this->entityManager->remove($address);
             $this->entityManager->flush();
+            
         }
+        $this->addFlash('success', 'Address deleted with success');
         return $this->redirectToRoute('app_account_address');
     }
 }
