@@ -4,11 +4,10 @@
 {% block body %}
 	<!-- Three columns of text below the carousel -->
 	<h3>Best sales</h3>
-	<p>Find our most sold products</p>
+	<p class="mb-4">Find our most sold products</p>
 	<div class="row">
 		{% for product in products %}
-			<div class="col-md-3">{% include 'products/single_product.html.twig' %}</div>
-
+			<div class="col-md-4 product-image rounded-top overflow-hidden hover-zoom mb-4">{% include 'products/single_product.html.twig' %}</div>
 		{% endfor %}
 	</div>
 	<!-- /.row -->

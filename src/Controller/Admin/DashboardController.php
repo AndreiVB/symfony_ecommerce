@@ -40,17 +40,20 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Symfony Ecommerce');
+            ->setTitle('The Shop Project');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
-        yield MenuItem::linkToCrud('Categories', 'fa fa-list', Category::class);
-        yield MenuItem::linkToCrud('Products', 'fa fa-tag', Product::class);
-        yield MenuItem::linkToCrud('Carriers', 'fa fa-truck', Carrier::class);
-        yield MenuItem::linkToCrud('Orders', 'fa fa-shopping-cart', Order::class);
-        yield MenuItem::linkToCrud('Headers', 'fa fa-desktop', Header::class);
+        return [
+        yield MenuItem::linkToRoute('Back to account', 'fa fa-arrow-left', 'app_account'),
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+        yield MenuItem::linkToCrud('Categories', 'fa fa-list', Category::class),
+        yield MenuItem::linkToCrud('Products', 'fa fa-tag', Product::class),
+        yield MenuItem::linkToCrud('Carriers', 'fa fa-truck', Carrier::class),
+        yield MenuItem::linkToCrud('Orders', 'fa fa-shopping-cart', Order::class),
+        yield MenuItem::linkToCrud('Headers', 'fa fa-desktop', Header::class),
+        ];
     }
 }

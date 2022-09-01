@@ -8,8 +8,9 @@
 {% block body %}
 
 	<div class="row mb-5">
-		<div class="col-md-5">
-			<img src="/uploads/{{product.illustration}}" alt="product.name" class="img-fluid">
+		<div class="col-md-5 product-image overflow-hidden hover-zoom mb-4">
+			{% include 'products/single_product.html.twig' %}
+
 		</div>
 
 		<div class="col-md-7 my-auto">
@@ -26,8 +27,7 @@
 	<p>Find our most sold products</p>
 	<div class="row">
 		{% for product in products %}
-			<div class="col-md-3">{% include 'products/single_product.html.twig' %}</div>
-
+			<div class="col-md-4">{% include 'products/single_product.html.twig' %}</div>
 		{% endfor %}
 	</div>
 

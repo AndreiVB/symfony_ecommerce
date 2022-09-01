@@ -62,7 +62,7 @@ class OrderCrudController extends AbstractCrudController
 
         $mail = new Mail();
         $confirmationMessage = "Your order on The Shop is beeing prepared";
-        $content = "Hello " . $order->getUser()->getFirstname() . ", your order on The Shop is beeing prepared by us";
+        $content = "Hello " . $order->getUser()->getFirstname() . ", your order on The Shop is beeing prepared";
         $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), $confirmationMessage, $content);
         
         return $this->redirect($url);      

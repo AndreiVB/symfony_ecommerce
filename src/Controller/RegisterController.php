@@ -26,6 +26,10 @@ class RegisterController extends AbstractController
      */
     public function index(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_account');
+        }
+
         //variable to notificate registration is valid
         $notification = null;
 
@@ -49,13 +53,14 @@ class RegisterController extends AbstractController
             
                 $mail = new Mail();
                 $welcomeMesssage = "Welcome on The Shop Project";
-                $content = "Hello " . $user->getFirstname() . ", hope you will have a great time on our site. We have a great diversity of fashion products. Enjoy shopping right now &#128516";
+                $content = "Hello " . $user->getFirstname() . ", hope you will have a great time on our site. We have a great diversity of fashion products. Enjoy shopping right now!";
                 $mail->send($user->getEmail(), $user->getFirstname(), $welcomeMesssage, $content);
                 $notification = "You have registered successfully";
 
             } else {
                 $notification = "Email address already taken";
-            }                        
+            }  
+            return $this->redirectToRoute('app_login');                  
         }
         return $this->render('register/index.html.twig', [
             'form' => $form->createView(),

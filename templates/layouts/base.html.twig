@@ -37,6 +37,9 @@
 	<body>
 		{{ include('layouts/partials/nav.html.twig') }}
 
+		{{include('layouts/partials/flash_messages.html.twig')}}
+
+
 		<main role="main" class="mb-5">
 			{% if block('carousel') is defined %}
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -84,8 +87,11 @@
 				<!-- FOOTER -->
 			</main>
 
-			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+			{# <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> #}
+			<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 			<script src="{{asset('assets/js/bootstrap.bundle.js')}}"></script>
+			<script src="{{asset('assets/js/main.js')}}"></script>
+
 
 			{{ include('layouts/partials/footer.html.twig') }}
 

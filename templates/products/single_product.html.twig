@@ -1,7 +1,12 @@
-<div class="border-top-0 border border-light bg-light text-center">
-	<a href="{{ path('app_product_show', {'slug' : product.slug }) }}"><img src="/uploads/{{product.illustration}}" alt="product.name" class="img-fluid"></a>
-	<h5 class="text-capitalize mt-2">{{product.name}}</h5>
-	<span class="text-muted d-block">{{product.subtitle}}</span>
-	<span>{{(product.price / 100)|number_format(2, ',', ',') }}
-		€</span>
+<div class="border border-light bg-light text-center text-md-small">
+	<div class="rounded-top overflow-hidden hover-zoom">
+		<a href="{{ path('app_product_show', {'slug' : product.slug }) }}"><img src="/uploads/{{product.illustration}}" alt="product.name" class="img-fluid"></a>
+	</div>
+	<a href="{{ path('app_product_show', {'slug' : product.slug }) }}" class="text-muted text-decoration-none">
+
+		<h5 class="text-capitalize mt-4">{{product.name}}</h5>
+		<span class="text-muted d-block">{{product.subtitle}}</span>
+		<span>{{(product.price / 100)|number_format(2, ',', ',') }}
+			€</span>
+	</a>
 </div>
