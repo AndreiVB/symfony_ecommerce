@@ -22,7 +22,7 @@ class StripeController extends AbstractController
     {
 
         $products_for_stripe = [];
-        $YOUR_DOMAIN = 'https://phpstack-831628-2862176.cloudwaysapps.com/';
+        $YOUR_DOMAIN = 'https://phpstack-831628-2862176.cloudwaysapps.com';
 
         $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
 
