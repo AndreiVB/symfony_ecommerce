@@ -23,19 +23,21 @@
 					<a href="{{path('app_account')}}">My account<small>({{app.user.firstName}})</small>
 					</a>
 					|
-					<a href="{{path('app_logout')}}">Logout<a/>
-					{% else %}
-						<a href="{{path('app_login')}}">Login</a>
-						|
-						<a href="{{path('app_register')}}">Register<a/>
-						{% endif %}
-					</div>
-					{% if app.user%}
-						<a href="{{path('app_cart')}}">
-							<img src="{{ asset('assets/images/shopping-cart.png') }}" alt="my-cart" class="cart-icon">
-						</a>
-					{% endif %}
+					<a href="{{path('app_logout')}}">Logout</a>
 
-				</div>
-			</nav>
-		</header>
+				{% else %}
+					<a href="{{path('app_login')}}">Login</a>
+					|
+					<a href="{{path('app_register')}}">Register</a>
+
+				{% endif %}
+			</div>
+			{% if app.user%}
+				<a href="{{path('app_cart')}}">
+					<img src="{{ asset('assets/images/shopping-cart.png') }}" alt="my-cart" class="cart-icon">
+				</a>
+			{% endif %}
+
+		</div>
+	</div>
+</nav></header>
