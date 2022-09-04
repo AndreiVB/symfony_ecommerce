@@ -27,7 +27,8 @@
 	<p>Find our most sold products</p>
 	<div class="row">
 		{% for product in products %}
-			<div class="col-md-4">{% include 'products/single_product.html.twig' %}</div>
+			<div class="col-md-4 product-image rounded-top overflow-hidden hover-zoom mb-4">{% include 'products/single_product.html.twig' %}</div>
+
 		{% endfor %}
 	</div>
 
