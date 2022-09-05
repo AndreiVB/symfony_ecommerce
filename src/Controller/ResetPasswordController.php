@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -46,7 +47,9 @@ class ResetPasswordController extends AbstractController
                 $mail = new Mail();
                 $url = $this->generateUrl('app_update_password', [
                     'token' => $reset_password->getToken()
-                ]);
+                ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
                 $confirmationMessage = 'Reset your password on The shop';
                 $content = "Hello " . $user->getFirstname() . " You have requested a password reset. Please click on the link to <a href='".$url."'>reset your password</a>. The link is valid for the next 2 hours.";
                 $mail->send($user->getEmail(), $user->getFirstname(). ' ' . $user->getLastname(), $confirmationMessage, $content);   
@@ -74,6 +77,7 @@ class ResetPasswordController extends AbstractController
                 $this->addFlash('notification', 'Your password request has expired. Please reset it again');
                 return $this->redirectToRoute('app_reset_password');
             }
+            //continue with password reset
             $form = $this->createForm(ResetPasswordType::class);
             $form->handleRequest($request);
 
@@ -92,7 +96,6 @@ class ResetPasswordController extends AbstractController
             return $this->render('reset_password/update.html.twig', [
                 'form' => $form->createView()
             ]);
-           //continue with password reset
     
         }
     }
