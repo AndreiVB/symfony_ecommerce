@@ -2,35 +2,36 @@
 
 
 {% block title %}The shop -
-	{{product.name}}
+{{product.name}}
 {% endblock %}
 
 {% block body %}
 
-	<div class="row mb-5">
-		<div class="col-md-5 product-image overflow-hidden hover-zoom mb-4">
-			{% include 'products/single_product.html.twig' %}
+<div class="row mb-5">
+	<div class="col-md-5 product-image overflow-hidden hover-zoom mb-4">
+		{% include 'products/single_product.html.twig' %}
 
-		</div>
-
-		<div class="col-md-7 my-auto">
-			<h5 class="text-capitalize">{{product.name}}</h5>
-			<p class="text-muted d-block">{{product.subtitle}}</p>
-			<span>{{(product.price / 100)|number_format(2, ',', ',') }}
-				€</span>
-			<p>{{ product.description }}</p>
-			<a href="{{ path('add_to_cart', { 'id' : product.id }) }}" class="btn btn-primary">Add to cart</a>
-		</div>
 	</div>
-	<hr>
-	<h3>Best sales</h3>
-	<p>Find our most sold products</p>
-	<div class="row">
-		{% for product in products %}
-			<div class="col-md-4 product-image rounded-top overflow-hidden hover-zoom mb-4">{% include 'products/single_product.html.twig' %}</div>
 
-		{% endfor %}
+	<div class="col-md-7 my-auto">
+		<h5 class="text-capitalize">{{product.name}}</h5>
+		<p class="text-muted d-block">{{product.subtitle}}</p>
+		<span>{{(product.price / 100)|number_format(2, ',', ',') }}
+			€</span>
+		<p>{{ product.description }}</p>
+		<a href="{{ path('add_to_cart', { 'id' : product.id }) }}" class="btn btn-primary">Add to cart</a>
 	</div>
+</div>
+<hr>
+<h3>Best sales</h3>
+<p>Find our most sold products</p>
+<div class="row">
+	{% for product in products %}
+	<div class="col-md-4 product-image rounded-top overflow-hidden hover-zoom mb-4">{% include
+		'products/single_product.html.twig' %}</div>
+
+	{% endfor %}
+</div>
 
 
 {% endblock %}
